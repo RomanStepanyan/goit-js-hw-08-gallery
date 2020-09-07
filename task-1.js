@@ -3,8 +3,7 @@ import images from './gallery-items.js'
 const modalWindowRef = document.querySelector('.js-lightbox');
 const galleryUlRef = document.querySelector('.js-gallery');
 const imglightboxRef = document.querySelector('.lightbox__image');
-const btnCloseModalRef = document.querySelector('.lightbox__button');
-const lightboxContainer = document.querySelector('.lightbox__content');
+
 const creatingLiTag = () =>{
     const li = document.createElement('li');
     return li;
@@ -17,6 +16,12 @@ const creatingImgTag = () => {
   const img = document.createElement('img');
   return img
 } 
+  
+const classRemove = () =>{
+    modalWindowRef.classList.remove('is-open');
+    imglightboxRef.src = '';
+}
+
 
 images.forEach(image => {
     const liTags = creatingLiTag(image);
@@ -40,10 +45,10 @@ galleryUlRef.addEventListener('click', event => {
 })
 
 modalWindowRef.addEventListener('click', event =>{
-    if (event.target === btnCloseModalRef || lightboxContainer){        
-        console.log('event.target', event.target);
-        console.log('event.currentTarget', event.currentTarget)
-        modalWindowRef.classList.remove('is-open');
-        imglightboxRef.src = '';
-    } 
+    if (event.target.nodeName === 'IMG') return
+    classRemove()
 })
+window.addEventListener('keydown', event =>{
+    if(event.key === 'Escape') classRemove();    
+})
+
