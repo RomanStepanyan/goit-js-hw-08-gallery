@@ -21,19 +21,19 @@ const classRemove = () =>{
     modalWindowRef.classList.remove('is-open');
     imglightboxRef.src = '';
 }
-
+function createElement(name, attrs = {}) {
+    const element = document.createElement(name)
+    for(let key in attrs) {
+        element.setAttribute(key, attrs[key])
+    }
+    return element
+}
 
 images.forEach(image => {
-    const liTags = creatingLiTag(image);
-    liTags.setAttribute('class', 'gallery__item');
-    const aTags = creatingATag(image);
-    aTags.setAttribute('class', 'gallery__link');
-    aTags.setAttribute('href', image.original);
-    const imgTags = creatingImgTag(image);
-    imgTags.setAttribute('class', 'gallery__image');
-    imgTags.setAttribute('src', image.preview);
-    imgTags.setAttribute('alt', image.description);
-    imgTags.setAttribute('data-source', image.original);
+    const liTags = createElement('li', {'class': 'gallery__item'});   
+    const aTags = createElement('a', {'class':'gallery__link', 'href':image.original});   
+    const imgTags = createElement('img', {'class':'gallery__image', 'src': image.preview, 
+    'alt':image.description, 'data-source': image.original})  
     aTags.appendChild(imgTags);
     liTags.appendChild(aTags);    
     galleryUlRef.appendChild(liTags)
