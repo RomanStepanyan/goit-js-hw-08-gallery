@@ -4,19 +4,10 @@ const modalWindowRef = document.querySelector('.js-lightbox');
 const galleryUlRef = document.querySelector('.js-gallery');
 const imglightboxRef = document.querySelector('.lightbox__image');
 
-const creatingLiTag = () =>{
-    const li = document.createElement('li');
-    return li;
-} 
-const creatingATag = () =>{
-   const a = document.createElement('a');
-   return a;
-} 
-const creatingImgTag = () => {
-  const img = document.createElement('img');
-  return img
-} 
-  
+function classAdd () {
+    modalWindowRef.classList.add('is-open')
+}
+
 const classRemove = () =>{
     modalWindowRef.classList.remove('is-open');
     imglightboxRef.src = '';
@@ -40,8 +31,8 @@ images.forEach(image => {
 })
 galleryUlRef.addEventListener('click', event => {
     event.preventDefault();
-    modalWindowRef.classList.add('is-open');
     imglightboxRef.src = event.target.dataset.source;
+    classAdd()
 })
 
 modalWindowRef.addEventListener('click', event =>{
